@@ -11,6 +11,7 @@ import { takeEvery, put } from 'redux-saga/effects';
 import getImage from './modules/redux/sagas/getImage.saga';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
+import currentImage from './modules/redux/reducers/currentImage.reducer';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -41,6 +42,7 @@ const tags = (state = [], action) => {
 const storeInstance = createStore(
     combineReducers({
         images,
+        currentImage
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

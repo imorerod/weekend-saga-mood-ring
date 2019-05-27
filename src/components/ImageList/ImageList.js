@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import mapReduxStateToProps from '../../modules/mapReduxStateToProps'
+import mapReduxStateToProps from '../../modules/mapReduxStateToProps';
 
 class ImageList extends Component {
 
@@ -31,7 +31,7 @@ class ImageList extends Component {
             payload = this.props.reduxState.currentImage - 1;
         }
 
-        this.props.dispatch({ type: 'SET_CURRENT_IMAGE', payload: payload });
+        this.props.dispatch({ type: 'GET_CURRENT_IMAGE', payload: payload });
     }
 
 
