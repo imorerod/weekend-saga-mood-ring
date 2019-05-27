@@ -1,14 +1,10 @@
-const feeling = (state = 0, action) => {
-    if (action.type === 'FEEDBACK_FEELING_DECREASE') {
-        const newstate = state - 1;
-        console.log('FEEDBACK_FEELING_DECREASE', newstate);
-        return newstate;
-    } else if (action.type === 'FEEDBACK_FEELING_INCREASE') {
-        const newstate = state + 1;
-        console.log('FEEDBACK_FEELING_INCREASE', newstate);
-        return newstate;
+const currentImage = (state = 0, action) => {
+    switch (action.type) {
+        case 'GET_CURRENT_IMAGE':
+            return action.payload;
+        default:
+            return state;
     }
-    return state;
 }
 
-export default feeling;
+export default currentImage;
