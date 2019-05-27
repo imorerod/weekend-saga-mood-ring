@@ -14,7 +14,7 @@ class TagsList extends Component {
         const tagArray = this.props.reduxState.tagsReducer.map((tag, index) => {
             console.log(tag);
             return (
-                <Tags key={tag.id} tag={tag.name} />
+                <Tags key={tag.id} tag={tag} />
             );
         })
 
