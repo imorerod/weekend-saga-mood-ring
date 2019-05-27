@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-router.get('/', (req,res) => {
+router.get('/', (req, res) => {
     const queryString = `SELECT * FROM "tags";`;
 
     pool.query(queryString)
@@ -14,7 +14,7 @@ router.get('/', (req,res) => {
         })
 });
 
-router.post('/', (req,res) => {
+router.post('/', (req, res) => {
     const queryString = `INSERT INTO "tags" ("name")
                             VALUES ($1);`;
 
@@ -27,13 +27,5 @@ router.post('/', (req,res) => {
             res.sendStatus(500);
         })
 });
-
-// router.put('/', (req,res) => {
-
-// });
-
-// router.delete('/', (req,res) => {
-
-// });
 
 module.exports = router;

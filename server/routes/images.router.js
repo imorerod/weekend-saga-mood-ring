@@ -18,7 +18,9 @@ router.post('/', (req,res) => {
     const queryString = `INSERT INTO "images" ("title", "path")
                             VALUES ($1, $2);`;
 
-    pool.query(queryString, [req.body.name])
+    pool.query(queryString,
+                [req.body.title,
+                req.body.path])
         .then((response) => {
             res.sendStatus(201);
         })
@@ -27,13 +29,5 @@ router.post('/', (req,res) => {
             res.sendStatus(500);
         })
 });
-
-// router.put('/', (req,res) => {
-
-// });
-
-// router.delete('/', (req,res) => {
-
-// });
 
 module.exports = router;
