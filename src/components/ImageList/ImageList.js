@@ -37,8 +37,8 @@ class ImageList extends Component {
 
     render() {
         let element = <div></div>;
-        if (this.props.reduxState.image.length > 0) {
-            const currentImage = this.props.reduxState.image[this.props.reduxState.currentImage];
+        if (this.props.reduxState.images.length > 0) {
+            const currentImage = this.props.reduxState.images[this.props.reduxState.currentImage];
             element = <img src={currentImage.path} alt={currentImage.title} />
         }
 
