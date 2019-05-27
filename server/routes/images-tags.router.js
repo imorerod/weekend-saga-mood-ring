@@ -4,7 +4,7 @@ const pool = require('../modules/pool');
 
 //   '/all'
 router.get('/all', (req,res) => {
-    const queryString = `SELECT * FROM "person"
+    const queryString = `SELECT * FROM "images"
                     JOIN "person_hobbies" ON "person"."id"="person_hobbies"."person_id"
                     JOIN "hobby" ON "person_hobbies"."hobby_id"="hobby"."id";`;
 
