@@ -7,17 +7,20 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 // Import saga middleware
 import createSagaMiddleware from  'redux-saga';
-import { takeEvery, put } from 'redux-saga/effects';
-import getImage from './modules/redux/sagas/getImage.saga';
-import getTags from './modules/redux/sagas/getTags.saga';
+import { takeEvery } from 'redux-saga/effects';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 
 // REDUCERS
+import images from './modules/redux/reducers/images.reducer';
 import currentImage from './modules/redux/reducers/currentImage.reducer';
 import tagsReducer from './modules/redux/reducers/tags.reducer';
 
+// SAGAS
+import getImage from './modules/redux/sagas/getImage.saga';
+import getTags from './modules/redux/sagas/getTags.saga';
 
+// ----------------------------------------- //
 const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
@@ -25,26 +28,6 @@ function* rootSaga() {
     yield takeEvery('GET_TAGS', getTags);
 }
 
-// Used to store images returned from the server
-const images = (state = [], action) => {
-    console.log('Caught it!');
-    switch (action.type) {
-        case 'SET_IMAGE':
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
-// Used to store the images tags (e.g. 'Inspirational', 'Calming', 'Energy', etc.)
-const tags = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_TAGS':
-            return action.payload;
-        default:
-            return state;
-    }
-}
 const storeInstance = createStore(
     combineReducers({
         images,
