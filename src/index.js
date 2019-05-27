@@ -3,25 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App.js';
 import registerServiceWorker from './registerServiceWorker';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
-import logger from 'redux-logger';
 // Import saga middleware
-import createSagaMiddleware from 'redux-saga';
+import createSagaMiddleware from  'redux-saga';
+import { takeEvery, put } from 'redux-saga/effects';
+import getImage from './modules/redux/sagas/getImage.saga';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
+import image from './modules/redux/sagas/getImage.saga';
 
-// Create the rootSaga generator function
-function* rootSaga() {
-
-}
-
-// Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
+
+function* rootSaga() {
+    yield takeEvery('GET_IMAGE', getImage);
+    }
 
 // Used to store images returned from the server
 const images = (state = [], action) => {
     switch (action.type) {
-        case 'SET_IMAGES':
+        case 'SET_IMAGE':
             return action.payload;
         default:
             return state;
@@ -37,16 +38,14 @@ const tags = (state = [], action) => {
             return state;
     }
 }
-
-// Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
-        images,
-        tags,
+        image,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
 );
+
 
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
