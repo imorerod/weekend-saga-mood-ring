@@ -9,14 +9,20 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from  'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import getImage from './modules/redux/sagas/getImage.saga';
+import getTags from './modules/redux/sagas/getTags.saga';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
+
+// REDUCERS
 import currentImage from './modules/redux/reducers/currentImage.reducer';
+import tagsReducer from './modules/redux/reducers/tags.reducer';
+
 
 const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
     yield takeEvery('GET_IMAGE', getImage);
+    yield takeEvery('GET_TAGS', getTags);
 }
 
 // Used to store images returned from the server
@@ -42,7 +48,8 @@ const tags = (state = [], action) => {
 const storeInstance = createStore(
     combineReducers({
         images,
-        currentImage
+        currentImage,
+        tagsReducer
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
