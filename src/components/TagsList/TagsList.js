@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapReduxStateToProps from '../../modules/mapReduxStateToProps';
-import Tags from '../Tags/Tags';
 
 class TagsList extends Component {
     componentDidMount() {
@@ -14,7 +13,10 @@ class TagsList extends Component {
         const tagArray = this.props.reduxState.tagsReducer.map((tag, index) => {
             console.log(tag);
             return (
-                <Tags key={tag.id} tag={tag} />
+                <button key={tag.id} data-id={tag.id} onClick={this.onTagClick} >
+                {tag.name}
+            </button>
+
             );
         })
 
