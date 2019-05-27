@@ -11,16 +11,16 @@ import { takeEvery, put } from 'redux-saga/effects';
 import getImage from './modules/redux/sagas/getImage.saga';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
-import image from './modules/redux/sagas/getImage.saga';
 
 const sagaMiddleware = createSagaMiddleware();
 
 function* rootSaga() {
     yield takeEvery('GET_IMAGE', getImage);
-    }
+}
 
 // Used to store images returned from the server
 const images = (state = [], action) => {
+    console.log('Caught it!');
     switch (action.type) {
         case 'SET_IMAGE':
             return action.payload;
@@ -40,7 +40,7 @@ const tags = (state = [], action) => {
 }
 const storeInstance = createStore(
     combineReducers({
-        image,
+        images,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

@@ -2,9 +2,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 5000;
-const imageRouter = './routes/images.router';
-const tagRouter = './routes/tags.router';
-const imagesTagsRouter = './routes/images-tags.router';
+const imageRouter = require('./routes/images.router');
+const tagRouter = require('./routes/tags.router');
+const imagesTagsRouter = require('./routes/images-tags.router');
 
 /** ---------- MIDDLEWARE ---------- **/
 app.use(bodyParser.json()); // needed for angular requests

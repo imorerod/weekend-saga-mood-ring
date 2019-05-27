@@ -6,18 +6,22 @@ import getImage from '../../modules/redux/sagas/getImage.saga';
 
 class ImageList extends Component {
     componentDidMount() {
-        // use component did mount to dispatch an action to request the imageList from the API
-        this.getImage();
+        this.props.dispatch({
+            type: 'GET_IMAGE'
+        });
     }
 
     render() {
+        const htmlArray = this.props.reduxState.images.map((image, index) => {
+            console.log(image);
+            return (
+                <Image key={image.id} path={image.path} />
+            );
+        })
+
         return (
             <div>
-                {this.props.reduxState.imageList.map((image, index) => {
-                    return (
-                        <Image key={image.id} image={image} />
-                    );
-                })}
+                {htmlArray}
             </div>
         )
     }
